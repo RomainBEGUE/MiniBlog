@@ -19,7 +19,7 @@ class TopicFixtures extends Fixture implements DependentFixtureInterface
                 $topic = new Topic();
                 $topic->setAuthor($this->getReference(User::class.mt_rand(1,20)));
                 $topic->setCreationDate($faker->dateTimeBetween('-2years','now'));
-                $topic->setIsPrivate(mt_rand(1,2));
+                $topic->setIsPrivate(mt_rand(0,1));
 
                 $this->addReference(Topic::class.$i, $topic);
                 $manager->persist($topic);

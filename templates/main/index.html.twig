@@ -3,8 +3,21 @@
 {% block title %}{{parent()}} | Accueil{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
+<div class="container row justify-content-md-center">
     <h1>Bienvenue</h1>
-
+    {% for topic in topics %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ topic.author.lastName~' '~topic.author.firstName }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ topic.creationDate | format_datetime('long', 'long', locale='fr') }}</h6>
+                <p class="card-text">{{ topic.messages[0].content }}</p>
+                {% if topic.isPrivate == false or  app.user %}
+                    <a href="{{ path('topic_show',{'id': topic.id}) }}" class="card-link consult">Consulter le topic</a>
+                {% else %}
+                    <button class="consult" onclick="alert('Ce topic est privé, vous devez vous connecter pour le visualiser, merci')"><img src="{{ 'IMG/locker.png' }}" alt="Logged Only" style="width: 30px"></button>
+                {% endif%}
+            </div>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

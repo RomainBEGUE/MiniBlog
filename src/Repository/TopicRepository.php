@@ -22,19 +22,21 @@ class TopicRepository extends ServiceEntityRepository
     // /**
     //  * @return Topic[] Returns an array of Topic objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findAllByOrder()
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+            ->innerJoin('t.author', 'a')
+            ->addSelect('a')
+            ->innerJoin('t.messages', 'm')
+            ->addOrderBy('m.creationDate', 'DESC')
+            ->addSelect('m')
+            ->orderBy('t.creationDate', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Topic

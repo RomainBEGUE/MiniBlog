@@ -8,23 +8,20 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ topic.id }}</td>
+                <th>Sujet du topic</th>
+                <td>{{ topic.messages[0].content }}</td>
             </tr>
             <tr>
-                <th>CreationDate</th>
-                <td>{{ topic.creationDate ? topic.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Posté le </th>
+                <td>{{ topic.creationDate ? topic.creationDate| format_datetime('long', 'long', locale='fr')}}</td>
             </tr>
             <tr>
-                <th>IsPrivate</th>
-                <td>{{ topic.isPrivate ? 'Yes' : 'No' }}</td>
+                <th>Topic privé</th>
+                <td>{{ topic.isPrivate ? 'Oui' : 'Non' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('topic_index') }}">back to list</a>
+    <a href="{{ path('main_home') }}">Retour à l'accueil</a>
 
-    <a href="{{ path('topic_edit', {'id': topic.id}) }}">edit</a>
-
-    {{ include('topic/_delete_form.html.twig') }}
 {% endblock %}
